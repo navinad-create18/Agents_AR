@@ -9,6 +9,7 @@
 <!-- Import Hammer.js Library -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js" integrity="sha512-UXumZrZNiOwnTcZSHLOfcTs0aos2MzBWHXOHOuB0J/R44QB0dwY5JgfbvljXcklVf65Gc4El6RjZ+lnwd2az2g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
+    
     //script for rotation and scale functions
 AFRAME.registerComponent("controller", {
   init: function () {
@@ -85,6 +86,8 @@ tick: function() {
 });
     
 </script>
+<!-- Animation Script for GLB -->
+<script src="animation-mixer.js"></script>
     
 </head>
 <body style='margin : 0px; overflow: hidden;'>
@@ -99,7 +102,8 @@ tick: function() {
            <!-- use your gltf model -->
       <a-entity gltf-model="Agentic_Architecture_AR1.glb" 
                 position = "0 0 0"
-                scale = "5 5 5" 
+                scale = "5 5 5"
+                rotation = "90 0 0"
                 controller></a-entity>
       </a-marker>
       
