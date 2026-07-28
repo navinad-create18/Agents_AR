@@ -107,12 +107,35 @@ AFRAME.registerComponent('animation-mixer', {
       data = this.data,
       clips = model.animations || (model.geometry || {}).animations || [];
 
-    if (!clips.length) return;
+if (!clips.length) return;
 
-    const re = data.useRegExp ? data.clip : wildcardToRegExp(data.clip);
+// If there is more than one clip, merge them into one.
+let clipsToPlay = clips;
 
-    for (let clip, i = 0; (clip = clips[i]); i++) {
-      if (clip.name.match(re)) {
+if (clips.length > 1) {
+
+    const allTracks = [];
+
+    let longestDuration = 0;
+
+    clips.forEach((clip) => {
+        allTracks.push(...clip.tracks);
+        longestDuration = Math.max(longestDuration, clip.duration);
+    });
+
+    clipsToPlay = [
+        new THREE.AnimationClip(
+            "MergedAnimation",
+            longestDuration,
+            allTracks
+        )
+    ];
+}
+
+const re = data.useRegExp ? data.clip : wildcardToRegExp(data.clip);
+
+for (let clip, i = 0; (clip = clipsToPlay[i]); i++) {
+      if (clipsToPlay.length === 1 || clip.name.match(re)) {
         const action = this.mixer.clipAction(clip, model);
 
         action.enabled = true;

@@ -28,6 +28,17 @@ AFRAME.registerComponent("controller", {
     // changed this to model-loaded to load both models instead of just one
     this.el.addEventListener("model-loaded", (evt) => {
       this.mesh = evt.detail.model;
+        const model = evt.detail.model;
+      const animations = model.animations || [];
+
+      console.log("Animation Clips:");
+      console.log(animations);
+
+      animations.forEach((clip, i) => {
+        console.log(
+          `${i}: ${clip.name} (${clip.duration.toFixed(2)}s)`
+        );
+      });
     });
 
     // attach Hammer to canvas relative to the html setup -- a-scene is canvas
@@ -101,7 +112,7 @@ tick: function() {
      <a-marker type='pattern' url='pattern-BigBotTexture.patt'>
            <!-- use your gltf model -->
       <a-entity gltf-model="Agentic_Architecture_AR1.glb" 
-                animation-mixer="clip:Take 001; loop:repeat"
+                animation-mixer="loop:repeat"
                 position = "0 0 0"
                 scale = "7 7 7"
                 rotation = "-90 0 0"
