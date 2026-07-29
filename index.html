@@ -108,10 +108,16 @@ tick: function() {
         to move the model!
       </div>
   <a-scene embedded arjs>
+    <a-assets>
+      <a-asset-item
+            id="AgentModel"
+            src="Agentic_Architecture_AR2.glb">
+      </a-asset-item>
+    </a-assets>
       <!-- define a marker for the model to track -->
      <a-marker type='pattern' url='pattern-BotTrackRef1.patt'>
            <!-- use your gltf model -->
-      <a-entity gltf-model="Agentic_Architecture_AR2.glb" 
+      <a-entity gltf-model="#AgentModel" 
                 animation-mixer="loop:repeat"
                 position = "0 0.5 0"
                 scale = "7 7 7"
@@ -119,9 +125,9 @@ tick: function() {
                 controller></a-entity>
       </a-marker>
     
-         <a-marker type='pattern' url='pattern-BotTrackRef1.patt'>
+         <a-marker type='pattern' url='ScreenPattern.patt'>
            <!-- use your gltf model -->
-      <a-entity gltf-model="Agentic_Architecture_AR2.glb" 
+      <a-entity gltf-model="#AgentModel" 
                 animation-mixer="loop:repeat"
                 position = "0 0 0"
                 scale = "7 7 7"
