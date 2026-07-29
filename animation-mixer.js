@@ -53,7 +53,9 @@ AFRAME.registerComponent('animation-mixer', {
     this.mixer.addEventListener('finished', (e) => {
       el.emit('animation-finished', { action: e.action, direction: e.direction });
     });
+    setTimeout(() => {
     if (this.data.clip) this.update({});
+}, 2000); // 2 second delay
   },
 
   remove: function () {
